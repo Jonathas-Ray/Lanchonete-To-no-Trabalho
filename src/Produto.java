@@ -11,7 +11,7 @@ public class Produto {
     private ArrayList<String> caminhoImagens = new ArrayList<>();
 
     public Produto(String nome, double preco, String descricao, String caminhoImagemOrigem) {
-        this.id = GeradorID.getNextId();
+        this.id = GeradorID.getNextIdProduto();
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
@@ -19,7 +19,7 @@ public class Produto {
     }
 
     public Produto(String nome, double preco, String descricao) {
-        this.id = GeradorID.getNextId();
+        this.id = GeradorID.getNextIdProduto();
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
@@ -129,7 +129,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "{ " + id + "   ------   " + nome + "   ------   " + preco + " }\n";
+        return "{ ID: " + id + "   -----| Nome: " + nome + "   -----| Valor: " + preco + " }\n";
     }
 
     public String getCompleteDescription() {

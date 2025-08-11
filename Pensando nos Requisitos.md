@@ -17,3 +17,6 @@ adicionar e remover produtos no sistema de vendas, será usado o ID do produto q
 frente posso ver a questão de persistência dos dados entre sessões com ".txt" ou ".json" mas isso abre precedente para 
 ser necessário verificar no sistema se a imagem apontada pela persistência existe nos arquivos do projeto bem como se as
 imagens que existem estão listadas.<br><br>
+Estou pensando sobre a classe Produto, como eu poderia fazer para que a venda uma vez gerada não fosse editável, uma
+maneira de contornar isso que eu pensei foi uma classe LOG com Data/Hora e a alteração mas não faz muito sentido sem um
+ banco de dados.

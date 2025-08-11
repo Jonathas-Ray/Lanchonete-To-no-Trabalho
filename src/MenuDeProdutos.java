@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDeProdutos {
-    public List<Produto> produtos = new ArrayList<>();
+    public static List<Produto> produtos = new ArrayList<>();
 
-    public void menuProduto() {
+    public static void menuProduto() {
         System.out.println("1 - Cadastrar Produto");
         System.out.println("2 - Listar Produtos");
         System.out.println("3 - Atualizar Produto");
@@ -41,7 +41,7 @@ public class MenuDeProdutos {
         }
     }
 
-    public void cadastrarProduto() {
+    public static void cadastrarProduto() {
         String nome = Input.String("Digite o nome do produto: ");
         double preco = Input.Double("Digite o preço do produto: ");
         String descricao = Input.String("Digite a descrição do produto: ");
@@ -67,7 +67,7 @@ public class MenuDeProdutos {
         menuProduto();
     }
 
-    public void listarProdutos() {
+    public static void listarProdutos() {
         if (produtos.isEmpty()) {
             System.out.println("Nenhum produto cadastrado.");
         } else {
@@ -87,7 +87,7 @@ public class MenuDeProdutos {
         }
     }
 
-    public void atualizarProduto() {
+    public static void atualizarProduto() {
         boolean continuarAtualizandoProdutos = true;
 
         while (continuarAtualizandoProdutos) {
@@ -193,7 +193,7 @@ public class MenuDeProdutos {
         menuProduto();
     }
 
-    public void deletarProduto() {
+    public static void deletarProduto() {
         listarProdutos();
         int indice = Input.Int("Digite o índice do produto que deseja deletar (ou -1 para voltar ao menu): ");
         if (indice == -1) {
@@ -216,6 +216,15 @@ public class MenuDeProdutos {
     public static void limparConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static Produto getProdutoById(int id) {
+        for (Produto produto : produtos) {
+            if (produto.getId() == id) {
+                return produto;
+            }
+        }
+        return null; // Retorna null se o produto não for encontrado
     }
 
 }
