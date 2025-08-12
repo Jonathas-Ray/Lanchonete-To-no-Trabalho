@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuVenda {
-    private List<Venda> vendas = new ArrayList<>();
+    protected static List<Venda> vendas = new ArrayList<>();
 
-    public void menuVenda() {
+    public static void menuVenda() {
         int opcao = 0;
+        Venda vendaAtual = new Venda();
         while (opcao != 5) {
-            Venda vendaAtual = new Venda();
             System.out.println("Menu de Vendas:");
             System.out.println("1 - Adicionar Produto");
             System.out.println("2 - Remover Produto");
@@ -19,14 +19,11 @@ public class MenuVenda {
             switch (opcao) {
                 case 1:
                     MenuDeProdutos.listarProdutos();
-                    vendaAtual.adicionarProduto(Input.Int("Digite o ID do produto: "),
-                            Input.Int("Digite a quantidade: "));
-                    MenuDeProdutos.limparConsole();
+                    vendaAtual.adicionarProduto(vendaAtual);
                     break;
                 case 2:
                     listarProdutosVenda(vendaAtual);
-                    vendaAtual.removerProduto(Input.Int("Digite o ID do produto: "),
-                            Input.Int("Digite a quantidade: "));
+                    vendaAtual.removerProduto(vendaAtual);
                     break;
                 case 3:
                     System.out.println("Venda atual: " + vendaAtual.getId());
@@ -47,14 +44,14 @@ public class MenuVenda {
         }
     }
 
-    private void listarProdutosVenda(Venda venda) {
+    private static void listarProdutosVenda(Venda venda) {
         System.out.println("Produtos na venda:");
         for (Produto produto : venda.getListaDeItens()) {
             System.out.println(produto);
         }
     }
 
-    public void listarVendas(){
+    public static void listarVendas(){
         if (vendas.isEmpty()) {
             System.out.println("Nenhuma venda registrada.");
         } else {

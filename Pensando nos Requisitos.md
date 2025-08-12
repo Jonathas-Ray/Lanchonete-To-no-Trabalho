@@ -20,3 +20,6 @@ imagens que existem estão listadas.<br><br>
 Estou pensando sobre a classe Produto, como eu poderia fazer para que a venda uma vez gerada não fosse editável, uma
 maneira de contornar isso que eu pensei foi uma classe LOG com Data/Hora e a alteração mas não faz muito sentido sem um
  banco de dados.
+
+Precisava separar as classes de maneira correta, preciso pesquisar sobre porque é improvavel que o correto em POO fosse
+ tão bagunçado quanto deixar tudo em src.

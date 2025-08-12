@@ -7,37 +7,36 @@ public class MenuDeProdutos {
     public static List<Produto> produtos = new ArrayList<>();
 
     public static void menuProduto() {
-        System.out.println("1 - Cadastrar Produto");
-        System.out.println("2 - Listar Produtos");
-        System.out.println("3 - Atualizar Produto");
-        System.out.println("4 - Deletar Produto");
-        System.out.println("5 - Sair");
-        int opcao = Input.Int("Escolha uma opção: ");
-        switch (opcao) {
-            case 1:
-                cadastrarProduto();
-                break;
-            case 2:
-                atualizarProduto();
-                break;
-            case 3:
-                deletarProduto();
-                break;
-            case 4:
-                listarProdutos();
-                break;
-            case 5:
-                limparConsole();
-                menuProduto();
-                break;
-            case 6:
-                System.out.println("Saindo...");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Opção inválida, tente novamente.");
-                menuProduto();
-                break;
+        boolean Continue = true;
+        while (Continue) {
+            System.out.println("1 - Cadastrar Produto");
+            System.out.println("2 - Atualizar Produto");
+            System.out.println("3 - Deletar Produto");
+            System.out.println("4 - Listar Produtos");
+            System.out.println("5 - Sair");
+            int opcao = Input.Int("Escolha uma opção: ");
+            switch (opcao) {
+                case 1:
+                    cadastrarProduto();
+                    break;
+                case 2:
+                    atualizarProduto();
+                    break;
+                case 3:
+                    deletarProduto();
+                    break;
+                case 4:
+                    listarProdutos();
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+                    Continue = false;
+                    break;
+                default:
+                    System.out.println("Opção inválida, tente novamente.");
+                    menuProduto();
+                    break;
+            }
         }
     }
 
@@ -64,7 +63,6 @@ public class MenuDeProdutos {
         produtos.add(novoProduto);
         System.out.println("Produto cadastrado com sucesso:");
         System.out.println(novoProduto); //Serve para verificar se o produto foi adicionado corretamente
-        menuProduto();
     }
 
     public static void listarProdutos() {
@@ -76,14 +74,13 @@ public class MenuDeProdutos {
                 System.out.println(produto);
             }
         }
-        int escolha = Input.Int("Digite um indice para ver a descrição completa de um produto ou -1 para voltar ao menu: ");
+        int escolha = Input.Int("Caso deseje ver a descrição completa de um produto, digite o ID do produto (ou -1 para continuar): ");
         if (escolha == -1) {
-            menuProduto();
-        } else if (escolha >= 0 && escolha < produtos.size()) {
-            Produto produtoEscolhido = produtos.get(escolha);
+        } else if (escolha >= 0 && escolha -1 < produtos.size()) {
+            Produto produtoEscolhido = getProdutoById(escolha);
             System.out.println(produtoEscolhido.getCompleteDescription());
         } else {
-            System.out.println("Índice inválido.");
+            System.out.println("ID inválido.");
         }
     }
 
@@ -93,17 +90,17 @@ public class MenuDeProdutos {
         while (continuarAtualizandoProdutos) {
             limparConsole();
             listarProdutos();
-            int indice = Input.Int(
+            int ID = Input.Int(
                     "Digite o índice do produto que deseja atualizar (ou -1 para voltar ao menu): "
             );
 
-            if (indice == -1) {
+            if (ID == -1) {
                 continuarAtualizandoProdutos = false; // sai do laço externo
                 break;
             }
 
-            if (indice >= 0 && indice < produtos.size()) {
-                Produto produto = produtos.get(indice);
+            if (ID >= 0 && ID -1 < produtos.size()) {
+                Produto produto = getProdutoById(ID);
 
                 boolean continuarEditandoAtributos = true;
                 while (continuarEditandoAtributos) {
@@ -190,25 +187,22 @@ public class MenuDeProdutos {
                 System.out.println("Índice inválido.");
             }
         }
-        menuProduto();
     }
 
     public static void deletarProduto() {
         listarProdutos();
-        int indice = Input.Int("Digite o índice do produto que deseja deletar (ou -1 para voltar ao menu): ");
-        if (indice == -1) {
+        int ID = Input.Int("Digite o ID do produto que deseja deletar (ou -1 para voltar ao menu): ");
+        if (ID == -1) {
             menuProduto();
-        } else if (indice >= 0 && indice < produtos.size()) {
-            Produto produtoRemover = produtos.get(indice);
-            if (!produtoRemover.getCaminhoImagens().isEmpty()) {
-                for (int i = 0; i < produtoRemover.getCaminhoImagens().size(); i++) {
-                    produtoRemover.removerImagem(i);
-                }
+        } else if (ID >= 0 && ID -1 < produtos.size()) {
+            Produto produtoRemover = getProdutoById(ID);
+            if (produtoRemover != null) {
+                produtos.remove(produtoRemover);
+                System.out.println("Produto removido com sucesso.");
+            } else {
+                System.out.println("Produto com ID " + ID + " não encontrado.");
             }
-            produtos.remove(indice);
-            System.out.println("Produto removido com sucesso!");
-        } else {
-            System.out.println("Índice inválido.");
+
         }
         menuProduto();
     }

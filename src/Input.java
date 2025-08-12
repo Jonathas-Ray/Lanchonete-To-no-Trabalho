@@ -66,26 +66,12 @@ public class Input {
 
     public static String String(String output) {
         System.out.println(output);
-        String value;
-        do {
-            value = scanner.nextLine();
-            if (value.isBlank()) {
-                System.out.println("Valor inválido");
-            } else {
-                return value;
-            }
-        } while (true);
+        String value = scanner.nextLine();
+        return value;
     }
     
     public static String String() {
-        String value;
-        do {
-            value = scanner.nextLine();
-            if (value.isBlank()) {
-                System.out.println("Valor inválido");
-            } else {
-                return value;
-            }
-        } while (true);
+        String value = scanner.nextLine();
+        return value;
     }
 }

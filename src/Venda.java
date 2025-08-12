@@ -32,34 +32,38 @@ public class Venda {
     }
 
     //Rever Adicionar e Remover Produto, produto deve ser encontrado pelo ID
-    public void adicionarProduto(int id, int quantidade) {
+    public void adicionarProduto(Venda venda) {
+        int id = Input.Int("Digite o ID do produto: ");
         Produto produto = MenuDeProdutos.getProdutoById(id);
         if (produto == null) {
             throw new IllegalArgumentException("Produto não encontrado.");
         }
+        int quantidade = Input.Int("Digite a quantidade: ");
         if (quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
         } else {
             for (int i = 0; i < quantidade; i++) {
-                listaDeItens.add(produto);
-                valorTotal += produto.getPreco();
+                venda.listaDeItens.add(produto);
+                venda.valorTotal += produto.getPreco();
             }
         }
     }
 
-    public void removerProduto(int id, int quantidade) {
+    public void removerProduto(Venda venda) {
+        int id = Input.Int("Digite o ID do produto: ");
         Produto produto = MenuDeProdutos.getProdutoById(id);
         if (produto == null) {
             throw new IllegalArgumentException("Produto não encontrado.");
         }
+        int quantidade = Input.Int("Digite a quantidade: ");
         if (quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
         } else {
             int removidos = 0;
-            for (int i = 0; i < listaDeItens.size() && removidos < quantidade; i++) {
-                if (listaDeItens.get(i).getId() == id) {
-                    listaDeItens.remove(i);
-                    valorTotal -= produto.getPreco();
+            for (int i = 0; i < venda.listaDeItens.size() && removidos < quantidade; i++) {
+                if (venda.listaDeItens.get(i).getId() == id) {
+                    venda.listaDeItens.remove(i);
+                    venda.valorTotal -= produto.getPreco();
                     removidos++;
                     i--; // Ajusta o índice após a remoção
                 }
